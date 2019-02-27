@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>BASE</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    </head>
+    <body>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'index'%}">Brand</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{%url 'admin:index'%}">Admin</a></li>
+                        <li><a href="{%url 'authapp:register'%}">Register</a></li>
+                        {% if user.is_authenticated %}
+                            <li> <a href="{%url 'authapp:user_logout'%}">Logout</a> </li>
+                        {% else %}
+                            <li> <a href="{% url 'authapp:user_login' %}">Login</a> </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container">
+                {%block body_block%}
+                <!-- Anything Outside this block will be inherited if you extend -->
+                {% endblock %}
+            </div>
+
+    </body>
+</html>
